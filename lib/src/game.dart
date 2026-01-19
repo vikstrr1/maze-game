@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'components/player.dart';
 import 'components/maze_wall.dart';
 import 'components/maze_exit.dart';
+import 'components/maze_border.dart'; // Import the border
 import 'models/maze_levels.dart';
 
 class MazeGame extends FlameGame with HasCollisionDetection {
@@ -14,12 +15,11 @@ class MazeGame extends FlameGame with HasCollisionDetection {
 
   @override
   Future<void> onLoad() async {
-    // 1. Force the resolution to 800x600 (Center is 0,0)
     camera = CameraComponent.withFixedResolution(width: 800, height: 600);
     
     final data = mazeLevels[levelId] ?? mazeLevels[1]!;
 
-    // 2. HUD: Joystick
+    // HUD layer: Joystick
     joystick = JoystickComponent(
       knob: CircleComponent(radius: 20, paint: Paint()..color = Colors.white.withOpacity(0.5)),
       background: CircleComponent(radius: 50, paint: Paint()..color = Colors.white.withOpacity(0.2)),
@@ -27,20 +27,23 @@ class MazeGame extends FlameGame with HasCollisionDetection {
     );
     camera.viewport.add(joystick);
 
-    // 3. World: Goal (Added first so it's "behind" the player)
+    // World layer: Add Visual Border first
+    world.add(MazeBorder());
+
+    // World layer: Goal
     world.add(MazeExit(position: data.exitPosition, levelId: levelId));
     
-    // 4. World: Walls
+    // World layer: Maze Walls
     for (var wall in data.walls) {
       world.add(MazeWall(wall['pos']!, wall['size']!));
     }
 
-    // 5. World: Player
+    // World layer: Player
     final player = PlayerBall(joystick: joystick);
     player.position = data.startPosition;
     world.add(player);
     
-    // 6. World: Boundaries (Keeps player within the 800x600 view)
+    // Boundary Hitbox: Physically stops the ball at the visual border
     world.add(ScreenHitbox());
   }
 }

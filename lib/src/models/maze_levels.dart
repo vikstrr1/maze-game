@@ -14,36 +14,53 @@ class MazeLevelData {
 
 final Map<int, MazeLevelData> mazeLevels = {
   1: MazeLevelData(
+    // Level 1: The "C" Path (Start Top-Left, Exit Center-Right)
     startPosition: Vector2(-350, -250),
-    exitPosition: Vector2(350, 250),
+    exitPosition: Vector2(300, 0),
     walls: [
-      {'pos': Vector2(0, -300), 'size': Vector2(20, 500)}, // Middle wall with gap at bottom
+      {'pos': Vector2(-200, -300), 'size': Vector2(20, 500)},
+      {'pos': Vector2(-200, 200), 'size': Vector2(400, 20)},
+      {'pos': Vector2(200, -100), 'size': Vector2(20, 320)},
     ],
   ),
   2: MazeLevelData(
+    // Level 2: The "Spiral" (Start Top-Left, Exit Center-Middle)
     startPosition: Vector2(-350, -250),
-    exitPosition: Vector2(350, 250),
+    exitPosition: Vector2(0, 0),
     walls: [
-      {'pos': Vector2(-150, -300), 'size': Vector2(20, 450)},
-      {'pos': Vector2(150, -150), 'size': Vector2(20, 450)},
+      {'pos': Vector2(-400, 100), 'size': Vector2(600, 20)}, // Bottom floor
+      {'pos': Vector2(200, -200), 'size': Vector2(20, 300)}, // Right wall
+      {'pos': Vector2(-100, -200), 'size': Vector2(300, 20)}, // Top ceiling
+      {'pos': Vector2(-100, -200), 'size': Vector2(20, 200)}, // Left inner wall
     ],
   ),
   3: MazeLevelData(
-    // THE SOLVABLE FULL-SCREEN MAZE
-    startPosition: Vector2(-350, -250), // Start Top-Left
-    exitPosition: Vector2(350, 250),    // Exit Bottom-Right
+    // Level 3: The "Snake" (Start Bottom-Left, Exit Top-Right)
+    startPosition: Vector2(-350, 250),
+    exitPosition: Vector2(350, -250),
     walls: [
-      // Wall 1: Gap at the bottom (-300 to 150, leaving 150px gap)
-      {'pos': Vector2(-250, -300), 'size': Vector2(20, 450)}, 
-      
-      // Wall 2: Gap at the top (-150 to 300, leaving 150px gap)
-      {'pos': Vector2(-100, -150), 'size': Vector2(20, 450)}, 
-      
-      // Wall 3: Gap at the bottom
-      {'pos': Vector2(50, -300), 'size': Vector2(20, 450)},
-      
-      // Wall 4: Gap at the top
-      {'pos': Vector2(200, -150), 'size': Vector2(20, 450)},
+      {'pos': Vector2(-250, -100), 'size': Vector2(20, 400)}, // Gap at top
+      {'pos': Vector2(-100, -300), 'size': Vector2(20, 400)}, // Gap at bottom
+      {'pos': Vector2(50, -100), 'size': Vector2(20, 400)},  // Gap at top
+      {'pos': Vector2(200, -300), 'size': Vector2(20, 400)}, // Gap at bottom
+    ],
+  ),
+  4: MazeLevelData(
+    // Level 4: The "Labyrinth" (True Maze Logic)
+    // Start Center-Left, Exit Bottom-Right
+    startPosition: Vector2(-350, 0),
+    exitPosition: Vector2(350, 250),
+    walls: [
+      // Main Vertical Ribs
+      {'pos': Vector2(-250, -300), 'size': Vector2(20, 250)},
+      {'pos': Vector2(-250, 50), 'size': Vector2(20, 250)},
+      {'pos': Vector2(-50, -150), 'size': Vector2(20, 300)},
+      {'pos': Vector2(150, -300), 'size': Vector2(20, 210)},
+      {'pos': Vector2(150, -30), 'size': Vector2(20, 350)},
+      // Interlocking Horizontal Blocks
+      {'pos': Vector2(-250, -50), 'size': Vector2(200, 20)},
+      {'pos': Vector2(-50, 150), 'size': Vector2(160, 20)},
+      {'pos': Vector2(150, -50), 'size': Vector2(200, 20)},
     ],
   ),
 };
