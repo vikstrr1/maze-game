@@ -13,10 +13,9 @@ class MazeGame extends FlameGame with HasCollisionDetection {
 
   @override
   Future<void> onLoad() async {
-    // 1. Fixed resolution camera
     camera = CameraComponent.withFixedResolution(width: 800, height: 600);
     
-    // 2. Setup Joystick (Added to viewport so it stays in one spot)
+    // HUD Layer
     joystick = JoystickComponent(
       knob: CircleComponent(radius: 20, paint: Paint()..color = Colors.white.withOpacity(0.5)),
       background: CircleComponent(radius: 50, paint: Paint()..color = Colors.white.withOpacity(0.2)),
@@ -24,15 +23,14 @@ class MazeGame extends FlameGame with HasCollisionDetection {
     );
     camera.viewport.add(joystick);
 
-    // 3. Add Player to the World
+    // World Layer
     final player = PlayerBall(joystick: joystick);
     player.position = Vector2(100, 100);
     world.add(player);
     
-    // 4. Load Level
     _loadLevel(levelId);
     
-    // 5. Add Screen boundaries to the world
+    // FIX: Add boundaries to the world so player stays within resolution
     world.add(ScreenHitbox());
   }
 
@@ -45,6 +43,7 @@ class MazeGame extends FlameGame with HasCollisionDetection {
       world.add(MazeExit(position: Vector2(700, 100), levelId: 2));
     } else {
       world.add(MazeWall(Vector2(0, 300), Vector2(600, 20)));
+      world.add(MazeWall(Vector2(400, 0), Vector2(20, 300)));
       world.add(MazeExit(position: Vector2(100, 500), levelId: 3));
     }
   }
