@@ -7,41 +7,45 @@ import 'components/maze_exit.dart';
 
 class MazeGame extends FlameGame with HasCollisionDetection {
   final int levelId;
-  late JoystickComponent joystick; // Track joystick instance
+  late JoystickComponent joystick;
 
   MazeGame({required this.levelId});
 
   @override
   Future<void> onLoad() async {
+    // 1. Fixed resolution camera
     camera = CameraComponent.withFixedResolution(width: 800, height: 600);
     
-    // Create the virtual joystick for touch input
+    // 2. Setup Joystick (Added to viewport so it stays in one spot)
     joystick = JoystickComponent(
       knob: CircleComponent(radius: 20, paint: Paint()..color = Colors.white.withOpacity(0.5)),
       background: CircleComponent(radius: 50, paint: Paint()..color = Colors.white.withOpacity(0.2)),
       margin: const EdgeInsets.only(left: 40, bottom: 40),
     );
-    add(joystick);
+    camera.viewport.add(joystick);
 
-    // FIX: Pass the required joystick argument to PlayerBall
-    add(PlayerBall(joystick: joystick)..position = Vector2(50, 50));
+    // 3. Add Player to the World
+    final player = PlayerBall(joystick: joystick);
+    player.position = Vector2(100, 100);
+    world.add(player);
     
+    // 4. Load Level
     _loadLevel(levelId);
     
-    add(ScreenHitbox());
+    // 5. Add Screen boundaries to the world
+    world.add(ScreenHitbox());
   }
 
   void _loadLevel(int id) {
     if (id == 1) {
-      add(MazeWall(Vector2(200, 0), Vector2(20, 400)));
-      add(MazeExit(position: Vector2(700, 500), levelId: 1));
+      world.add(MazeWall(Vector2(300, 0), Vector2(20, 400)));
+      world.add(MazeExit(position: Vector2(700, 500), levelId: 1));
     } else if (id == 2) {
-      add(MazeWall(Vector2(100, 100), Vector2(300, 20)));
-      add(MazeWall(Vector2(400, 100), Vector2(20, 300)));
-      add(MazeExit(position: Vector2(700, 100), levelId: 2));
-    } else if (id == 3) {
-      add(MazeWall(Vector2(0, 300), Vector2(600, 20)));
-      add(MazeExit(position: Vector2(50, 500), levelId: 3));
+      world.add(MazeWall(Vector2(100, 200), Vector2(400, 20)));
+      world.add(MazeExit(position: Vector2(700, 100), levelId: 2));
+    } else {
+      world.add(MazeWall(Vector2(0, 300), Vector2(600, 20)));
+      world.add(MazeExit(position: Vector2(100, 500), levelId: 3));
     }
   }
 }

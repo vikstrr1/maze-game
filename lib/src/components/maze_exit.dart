@@ -10,7 +10,11 @@ class MazeExit extends RectangleComponent with CollisionCallbacks {
   final int levelId;
 
   MazeExit({required Vector2 position, required this.levelId}) 
-    : super(position: position, size: Vector2(50, 50), paint: Paint()..color = Colors.green);
+    : super(
+        position: position, 
+        size: Vector2(60, 60), 
+        paint: Paint()..color = Colors.green,
+      );
 
   @override
   Future<void> onLoad() async {
@@ -21,10 +25,8 @@ class MazeExit extends RectangleComponent with CollisionCallbacks {
   void onCollisionStart(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollisionStart(intersectionPoints, other);
     if (other is PlayerBall) {
-      // Trigger the Firebase save in the controller
       Get.find<GameController>().completeLevel(levelId);
-      // Navigate to the result screen
-      Get.to(() => ResultScreen(levelId: levelId));
+      Get.off(() => ResultScreen(levelId: levelId));
     }
   }
 }

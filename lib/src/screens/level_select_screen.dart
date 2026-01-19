@@ -18,7 +18,7 @@ class LevelSelectScreen extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Obx(() {
-              // FIX: Access the observable value here so Obx tracks it
+              // FIX: Access .value inside Obx so GetX tracks it
               final currentUnlocked = gameController.unlockedLevel.value;
 
               return GridView.builder(
