@@ -12,8 +12,9 @@ class MazeExit extends RectangleComponent with CollisionCallbacks {
   MazeExit({required Vector2 position, required this.levelId}) 
     : super(
         position: position, 
-        size: Vector2(200, 200), 
-        paint: Paint()..color = Colors.green,
+        size: Vector2(50, 50), 
+        paint: Paint()..color = Colors.greenAccent,
+        anchor: Anchor.center,
       );
 
   @override

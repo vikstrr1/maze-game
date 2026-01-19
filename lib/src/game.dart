@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'components/player.dart';
 import 'components/maze_wall.dart';
 import 'components/maze_exit.dart';
+import 'models/maze_levels.dart'; // Import the new data file
 
 class MazeGame extends FlameGame with HasCollisionDetection {
   final int levelId;
@@ -15,7 +16,10 @@ class MazeGame extends FlameGame with HasCollisionDetection {
   Future<void> onLoad() async {
     camera = CameraComponent.withFixedResolution(width: 800, height: 600);
     
-    // HUD Layer
+    // 1. Get Level Data
+    final levelData = mazeLevels[levelId] ?? mazeLevels[1]!;
+
+    // 2. Setup Joystick
     joystick = JoystickComponent(
       knob: CircleComponent(radius: 20, paint: Paint()..color = Colors.white.withOpacity(0.5)),
       background: CircleComponent(radius: 50, paint: Paint()..color = Colors.white.withOpacity(0.2)),
@@ -23,28 +27,25 @@ class MazeGame extends FlameGame with HasCollisionDetection {
     );
     camera.viewport.add(joystick);
 
-    // World Layer
+    // 3. Add Player at start position
     final player = PlayerBall(joystick: joystick);
-    player.position = Vector2(100, 100);
+    player.position = levelData.startPosition;
     world.add(player);
     
-    _loadLevel(levelId);
+    // 4. Load Maze Components
+    _buildMaze(levelData);
     
-    // FIX: Add boundaries to the world so player stays within resolution
+    // Add world boundaries
     world.add(ScreenHitbox());
   }
 
-  void _loadLevel(int id) {
-    if (id == 1) {
-      world.add(MazeWall(Vector2(300, 0), Vector2(20, 400)));
-      world.add(MazeExit(position: Vector2(700, 500), levelId: 1));
-    } else if (id == 2) {
-      world.add(MazeWall(Vector2(100, 200), Vector2(400, 20)));
-      world.add(MazeExit(position: Vector2(700, 100), levelId: 2));
-    } else {
-      world.add(MazeWall(Vector2(0, 300), Vector2(600, 20)));
-      world.add(MazeWall(Vector2(400, 0), Vector2(20, 300)));
-      world.add(MazeExit(position: Vector2(100, 500), levelId: 3));
+  void _buildMaze(MazeLevelData data) {
+    // Add the green exit goal
+    world.add(MazeExit(position: data.exitPosition, levelId: levelId));
+
+    // Add all walls defined in the layout
+    for (var wall in data.walls) {
+      world.add(MazeWall(wall['pos']!, wall['size']!));
     }
   }
 }
