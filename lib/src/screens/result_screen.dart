@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 class ResultScreen extends StatelessWidget {
   final int levelId;
-
   const ResultScreen({super.key, required this.levelId});
 
   @override
@@ -14,18 +13,14 @@ class ResultScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.stars, size: 100, color: Colors.yellow),
+            const Icon(Icons.check_circle_outline, size: 100, color: Colors.green),
             const SizedBox(height: 20),
-            Text(
-              'Level $levelId Clear!',
-              style: const TextStyle(fontSize: 32, color: Colors.white, fontWeight: FontWeight.bold),
-            ),
+            Text('Level $levelId Complete!', 
+              style: const TextStyle(fontSize: 32, color: Colors.white)),
             const SizedBox(height: 40),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15)),
-              // Requirement: Intuitive navigation back to level selection
-              onPressed: () => Get.back(), 
-              child: const Text('Back to Levels'),
+              onPressed: () => Get.back(), // Navigates back to Level Selection
+              child: const Text('Return to Level Select'),
             ),
           ],
         ),
