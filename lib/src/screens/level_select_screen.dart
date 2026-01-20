@@ -14,7 +14,7 @@ class LevelSelectScreen extends StatelessWidget {
       backgroundColor: Colors.blueGrey[900], // Sophisticated dark theme
       appBar: AppBar(
         title: const Text('MAZE SELECTION'),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white54,
         elevation: 0,
       ),
       body: Center(
