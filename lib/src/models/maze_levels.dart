@@ -22,7 +22,7 @@ final Map<int, MazeLevelData> mazeLevels = {
       {'pos': Vector2(-200, -300), 'size': Vector2(20, 500)}, 
       {'pos': Vector2(-200, 200), 'size': Vector2(420, 20)}, 
       {'pos': Vector2(200, -100), 'size': Vector2(20, 320)}, 
-      {'pos': Vector2(100, -100), 'size': Vector2(150, 20)},
+      {'pos': Vector2(70, -100), 'size': Vector2(150, 20)},
     ],
   ),
   2: MazeLevelData(

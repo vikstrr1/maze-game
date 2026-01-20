@@ -53,7 +53,7 @@ class LevelSelectScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                         boxShadow: isUnlocked ? [
                           BoxShadow(
-                            color: Colors.blue.withOpacity(0.4),
+                            color: Colors.blue.withValues(alpha:0.4),
                             blurRadius: 10,
                             spreadRadius: 2,
                           )

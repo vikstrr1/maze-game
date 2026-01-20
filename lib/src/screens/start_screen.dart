@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'level_select_screen.dart';
+import 'package:get/get.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -32,10 +33,7 @@ class StartScreen extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                   ),
-                  onPressed: () => Navigator.push(
-                    context, 
-                    MaterialPageRoute(builder: (context) => const LevelSelectScreen())
-                  ),
+                  onPressed: () => Get.to(() => const LevelSelectScreen()),
                   child: const Text('SELECT LEVEL', style: TextStyle(fontSize: 20)),
                 ),
               ],
