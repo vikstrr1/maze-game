@@ -16,11 +16,12 @@ final Map<int, MazeLevelData> mazeLevels = {
   1: MazeLevelData(
     // Level 1: The "C" Path (Start Top-Left, Exit Center-Right)
     startPosition: Vector2(-350, -250),
-    exitPosition: Vector2(300, 0),
+    exitPosition: Vector2(0, 0),
     walls: [
       {'pos': Vector2(-200, -300), 'size': Vector2(20, 500)},
       {'pos': Vector2(-200, 200), 'size': Vector2(400, 20)},
       {'pos': Vector2(200, -100), 'size': Vector2(20, 320)},
+      {'pos': Vector2(200, 0), 'size': Vector2(20, 100)},
     ],
   ),
   2: MazeLevelData(

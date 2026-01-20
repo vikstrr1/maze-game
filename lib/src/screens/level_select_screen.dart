@@ -11,7 +11,7 @@ class LevelSelectScreen extends StatelessWidget {
     final gameController = Get.find<GameController>();
 
     return Scaffold(
-      backgroundColor: Colors.blueGrey[900], // Sophisticated dark theme
+      backgroundColor: Colors.blueGrey[900], 
       appBar: AppBar(
         title: const Text('MAZE SELECTION'),
         backgroundColor: Colors.white54,
