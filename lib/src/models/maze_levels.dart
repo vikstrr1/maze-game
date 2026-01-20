@@ -17,12 +17,12 @@ final Map<int, MazeLevelData> mazeLevels = {
     // Level 1: Connected "C" Path with a pocket finish
     startPosition: Vector2(-350, -250),
     // GOAL POSITION: Tucked into the corner of the L-shape
-    exitPosition: Vector2(280, 150), 
+    exitPosition: Vector2(150, 50), 
     walls: [
       {'pos': Vector2(-200, -300), 'size': Vector2(20, 500)}, 
       {'pos': Vector2(-200, 200), 'size': Vector2(420, 20)}, 
       {'pos': Vector2(200, -100), 'size': Vector2(20, 320)}, 
-      {'pos': Vector2(200, -100), 'size': Vector2(150, 20)},
+      {'pos': Vector2(100, -100), 'size': Vector2(150, 20)},
     ],
   ),
   2: MazeLevelData(
