@@ -27,7 +27,6 @@ class MazeExit extends RectangleComponent with CollisionCallbacks {
     super.onCollisionStart(intersectionPoints, other);
     if (other is PlayerBall) {
       Get.find<GameController>().completeLevel(levelId);
-      // CHANGE THIS:
       Get.off(() => ResultScreen(levelId: levelId));
     }
   }

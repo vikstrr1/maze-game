@@ -19,28 +19,23 @@ class LevelSelectScreen extends StatelessWidget {
       ),
       body: Center(
         child: ConstrainedBox(
-          // Project Requirement: Max width to limit content on high-res devices
           constraints: const BoxConstraints(maxWidth: 800), 
           child: Padding(
             padding: const EdgeInsets.all(24.0),
             child: Obx(() {
-              // Access current progression from Firebase via GetX controller
+              // Defined here once
               final currentUnlocked = gameController.unlockedLevel.value;
 
-              return GridView.builder(
+              return GridView.count(
                 shrinkWrap: true,
-                // Project Requirement: Breakpoint influencing layout
-                // 3 columns on wide screens, 2 on narrow phones
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: context.width > 500 ? 3 : 2, 
-                  crossAxisSpacing: 25,
-                  mainAxisSpacing: 25,
-                  childAspectRatio: 1.1,
-                ),
-                // We have increased this to 4 to support your new harder level
-                itemCount: 4, 
-                itemBuilder: (context, index) {
+                crossAxisCount: context.width > 500 ? 3 : 2, 
+                crossAxisSpacing: 25,
+                mainAxisSpacing: 25,
+                childAspectRatio: 1.1,
+                children: List.generate(4, (index) {
                   int levelNumber = index + 1;
+                  
+                  // REMOVED the redundant 'final currentUnlocked' line from here
                   bool isUnlocked = levelNumber <= currentUnlocked;
 
                   return InkWell(
@@ -53,7 +48,7 @@ class LevelSelectScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                         boxShadow: isUnlocked ? [
                           BoxShadow(
-                            color: Colors.blue.withValues(alpha:0.4),
+                            color: Colors.blue.withOpacity(0.4),
                             blurRadius: 10,
                             spreadRadius: 2,
                           )
@@ -89,7 +84,7 @@ class LevelSelectScreen extends StatelessWidget {
                       ),
                     ),
                   );
-                },
+                }),
               );
             }),
           ),

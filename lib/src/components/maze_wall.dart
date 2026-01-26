@@ -12,7 +12,6 @@ class MazeWall extends RectangleComponent with CollisionCallbacks {
 
   @override
   Future<void> onLoad() async {
-    // FIX: Set to passive for better performance and reliability
     add(RectangleHitbox()..collisionType = CollisionType.passive);
   }
 }

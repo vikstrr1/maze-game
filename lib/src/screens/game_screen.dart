@@ -10,7 +10,6 @@ class GameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // The AppBar allows the user to intuitively navigate back
       appBar: AppBar(
         title: Text('Level $levelId'),
         leading: IconButton(
