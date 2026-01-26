@@ -37,7 +37,7 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 const Text(
                   'To save your level progression and unlock new challenges, please sign in. '
-                  'No registration is required—you can start playing instantly.',
+                  'No registration is required, you can start playing instantly.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16,
@@ -62,10 +62,6 @@ class LoginScreen extends StatelessWidget {
                   onPressed: () => userController.loginAnonymously(),
                 ),
                 const SizedBox(height: 12),
-                const Text(
-                  'Your progress will be linked to this device.',
-                  style: TextStyle(color: Colors.white54, fontSize: 12),
-                ),
               ],
             ),
           ),
